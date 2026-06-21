@@ -331,6 +331,52 @@
             border-color: #3b82f6;
         }
 
+        /* ===== СЕКЦІЯ ВІДЕОГАЛЕРЕЇ ===== */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .video-card {
+            background-color: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 14px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: #000;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-card h3 {
+            font-size: 1.1rem;
+            color: #ffffff;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
         /* ===== ВСПЛЫВАЮЩЕЕ ОКНО АНКЕТЫ ЗАКАЗА (MODAL) ===== */
         .modal {
             position: fixed;
@@ -586,7 +632,6 @@
 </head>
 <body>
 
-    <!-- СЕКЦІЯ РЕЄСТРАЦІЇ -->
     <div id="auth-screen" class="auth-wrapper">
         <div class="auth-box">
             <h2 data-lang-key="auth-title">Вітаємо у <span>Web Studio</span></h2>
@@ -600,7 +645,6 @@
         </div>
     </div>
 
-    <!-- ГОЛОВНИЙ КОНТЕНТ САЙТУ -->
     <div id="site-content" class="hidden">
         <header>
             <nav>
@@ -608,10 +652,10 @@
                 <ul class="nav-links">
                     <li><a href="#home" data-lang-key="nav-home">Головна</a></li>
                     <li><a href="#projects" data-lang-key="nav-prices">Послуги & Ціни</a></li>
+                    <li><a href="#video" data-lang-key="nav-video">Відео</a></li>
                     <li><a href="#gallery" data-lang-key="nav-gallery">Галерея</a></li>
                     <li><a href="#about" data-lang-key="nav-about">Про мене</a></li>
                     
-                    <!-- КНОПКИ ПЕРЕКЛЮЧЕНИЯ ЯЗЫКА -->
                     <div class="lang-switcher">
                         <button class="lang-btn active" onclick="changeLanguage('uk')">UA</button>
                         <button class="lang-btn" onclick="changeLanguage('en')">EN</button>
@@ -628,12 +672,10 @@
             <a href="#projects" class="cta-btn" data-lang-key="hero-btn">Дивитись прайс-лист</a>
         </section>
 
-        <!-- СЕКЦІЯ ПОСЛУГ ТА ЦІН -->
         <section id="projects" class="section">
             <h2 class="section-title" data-lang-key="prices-title">Мої послуги та прайс-лист</h2>
             <div class="grid">
                 
-                <!-- Картка 1 -->
                 <div class="card">
                     <div class="card-top">
                         <span class="card-icon">💻</span>
@@ -646,7 +688,6 @@
                     </div>
                 </div>
 
-                <!-- Картка 2 -->
                 <div class="card">
                     <div class="card-top">
                         <span class="card-icon">⚙️</span>
@@ -659,7 +700,6 @@
                     </div>
                 </div>
 
-                <!-- Картка 3 -->
                 <div class="card">
                     <div class="card-top">
                         <span class="card-icon">⚡</span>
@@ -675,7 +715,34 @@
             </div>
         </section>
 
-        <!-- ВСПЛЫВАЮЩЕЕ ОКНО: АНКЕТА ЗАКАЗА -->
+        <section id="video" class="section">
+            <h2 class="section-title" data-lang-key="video-title">Відеоролики</h2>
+            <div class="video-grid">
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="video1.mp4" controls preload="metadata"></video>
+                    </div>
+                    <h3 data-lang-key="vcard1-title">Анімація розробки сайтів</h3>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="video2.mp4" controls preload="metadata"></video>
+                    </div>
+                    <h3 data-lang-key="vcard2-title">Процес написання коду</h3>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video src="video3.mp4" controls preload="metadata"></video>
+                    </div>
+                    <h3 data-lang-key="vcard3-title">Робота з інтерфейсами та скриптами</h3>
+                </div>
+
+            </div>
+        </section>
+
         <div id="order-modal" class="modal">
             <div class="modal-content">
                 <span id="close-modal-btn" class="close-modal">&times;</span>
@@ -698,15 +765,13 @@
                     
                     <textarea id="order-details" placeholder="Опишіть ваше завдання (Для чого потрібен мод/сайт, що саме і як має працювати в ньому?)" required></textarea>
                     
-                    <!-- Предупреждение об оплате -->
                     <div class="payment-warning" data-lang-key="modal-warning">
-                        ⚠️ Зверніть увагу: оплата приймається тільки на українські картки (UAH)!
+                        ⚠️ Зверніть увагу: оплата приймається только на українські картки (UAH)!
                     </div>
 
                     <button type="submit" id="submit-order-btn" class="auth-btn" data-lang-key="modal-submit">Надіслати замовлення</button>
                 </form>
 
-                <!-- БЛОК С КОНТАКТАМИ (Всплывает после отправки формы) -->
                 <div id="success-contacts" class="success-contacts-box hidden">
                     <h4 id="success-header" style="color: #10b981; text-align: center; margin-bottom: 10px;" data-lang-key="success-title">🎉 Анкету успішно надіслано!</h4>
                     <p id="success-p" style="font-size: 0.9rem; margin-bottom: 15px;" data-lang-key="success-desc">Щоб прискорити обробку, ви можете написати Всеволоду напряму:</p>
@@ -738,7 +803,6 @@
             </div>
         </section>
 
-        <!-- АНКЕТА ПРО СЕБЕ -->
         <div id="about" class="about-me-box">
             <h3 data-lang-key="about-title">Анкета про себе</h3>
             <p><b data-lang-key="about-name-lbl">Прізвище та ім'я:</b> <span data-lang-key="about-name-val">Кердман Всеволод</span></p>
@@ -747,7 +811,7 @@
             <p><b data-lang-key="about-city-lbl">Місто / населений пункт:</b> <span data-lang-key="about-city-val">Україна</span></p>
             <p><b data-lang-key="about-hobby-lbl">Хобі та захоплення:</b> <span data-lang-key="about-hobby-val">Web-розробка, створення сайтів, комп'ютерні ігри</span></p>
             <p><b data-lang-key="about-fav-lbl">Моя улюблена книга / фильм / гра:</b> Minecraft, CS2</p>
-            <p><b data-lang-key="about-insp-lbl">Що мене надихає:</b> <span data-lang-key="about-insp-val">Круті та красиві веб-інтерфейси, успіхи у кодуванні</span></p>
+            <p><b data-lang-key="about-insp-lbl">Що мене надихає:</b> <span data-lang-key="about-insp-val">Круті та красиві веб-інтерфейси, успехи у кодуванні</span></p>
             <p><b data-lang-key="about-goal-lbl">Чого хочу навчитися цього року:</b> <span data-lang-key="about-goal-val">Добре опанувати JavaScript, покращити навички у Web розробці</span></p>
             <p><b data-lang-key="about-fact-lbl">Цікавий факт про мене:</b> <span data-lang-key="about-fact-val">Створюю власні веб-проєкти з нуля і люблю оптимізувати код.</span></p>
             <p><b data-lang-key="about-quote-lbl">Улюблена цитата:</b> <span data-lang-key="about-quote-val">«Упав — вставай, встав — упав, чокопай» — Кердман Всеволод</span></p>
@@ -758,7 +822,6 @@
         </footer>
     </div>
 
-    <!-- ===== ЛОГІКА НА JAVASCRIPT ===== -->
     <script>
         // === СЛОВАРЬ ПЕРЕВОДОВ (UA / EN) ===
         const translations = {
@@ -768,6 +831,7 @@
                 "auth-btn": "Зареєструватися та увійти",
                 "nav-home": "Головна",
                 "nav-prices": "Послуги & Ціни",
+                "nav-video": "Відео",
                 "nav-gallery": "Галерея",
                 "nav-about": "Про мене",
                 "nav-logout": "Вийти",
@@ -776,7 +840,7 @@
                 "hero-btn": "Дивитись прайс-лист",
                 "prices-title": "Мої послуги та прайс-лист",
                 "card1-title": "Розробка сайтів",
-                "card1-desc": "Верстка та програмування лендінгів, сайтів-візиток, портфоліо на HTML/CSS/JS \"під ключ\".",
+                "card1-desc": "Верстка та програмування лендінгів, сайтів-візиток, portfolio на HTML/CSS/JS \"під ключ\".",
                 "card1-price": "до €5.00",
                 "card1-btn": "Замовити сайт",
                 "card2-title": "Minecraft Плагіни",
@@ -787,15 +851,19 @@
                 "card3-desc": "Створення ігрових модифікацій (Forge/Fabric) або розробка унікальних скриптів під твої задачі.",
                 "card3-price": "до €4.50",
                 "card3-btn": "Замовити мод",
+                "video-title": "Мої Відеоролики",
+                "vcard1-title": "Анімація розробки сайтів",
+                "vcard2-title": "Процес написання коду",
+                "vcard3-title": "Робота з інтерфейсами та скриптами",
                 "modal-title": "Оформлення <span>Замовлення</span>",
                 "modal-desc": "Заповніть анкету нижче, щоб надіслати заявку.",
                 "opt-site": "Розробка сайтів (до €5.00)",
-                "opt-plugin": "Minecraft Плагіни (до €3.50)",
+                "opt-plugin": "Minecraft Plugins (до €3.50)",
                 "opt-mod": "Моди та Скрипти (до €4.50)",
                 "modal-warning": "⚠️ Зверніть увагу: оплата приймається тільки на українські картки (UAH)!",
                 "modal-submit": "Надіслати замовлення",
                 "success-title": "🎉 Анкету успішно надіслано!",
-                "success-desc": "Щбто прискорити обробку, ви можете написати Всеволоду напряму:",
+                "success-desc": "Щоб прискорити обробку, ви можете написати Всеволоду напряму:",
                 "contact-tg": "✈️ Написати в Telegram: @Angelo4ek266",
                 "contact-ds": "💬 Мій Discord: toxictop",
                 "contact-call": "📞 Зателефонувати: 075 103 4661",
@@ -830,6 +898,7 @@
                 "auth-btn": "Register & Log In",
                 "nav-home": "Home",
                 "nav-prices": "Services & Prices",
+                "nav-video": "Video",
                 "nav-gallery": "Gallery",
                 "nav-about": "About me",
                 "nav-logout": "Log Out",
@@ -849,6 +918,10 @@
                 "card3-desc": "Creating game modifications (Forge/Fabric) or developing unique scripts for your tasks.",
                 "card3-price": "up to €4.50",
                 "card3-btn": "Order Mod",
+                "video-title": "My Videos",
+                "vcard1-title": "Website development animation",
+                "vcard2-title": "Coding process layout",
+                "vcard3-title": "Working with interfaces and scripts",
                 "modal-title": "Order <span>Placement</span>",
                 "modal-desc": "Fill out the form below to send your request.",
                 "opt-site": "Website Development (up to €5.00)",
@@ -870,129 +943,171 @@
                 "about-city-lbl": "Country / Location:",
                 "about-city-val": "Ukraine",
                 "about-hobby-lbl": "Hobbies & Interests:",
-                "about-hobby-val": "Web development, building websites, computer games",
-                "about-fav-lbl": "Favorite book / movie / game:",
+                "about-hobby-val": "Web development, creating websites, computer games",
+                "about-fav-lbl": "My favorite book / movie / game:",
                 "about-insp-lbl": "What inspires me:",
-                "about-insp-val": "Clean and beautiful web UI, successes in programming",
+                "about-insp-val": "Cool and beautiful web interfaces, coding success",
                 "about-goal-lbl": "What I want to learn this year:",
-                "about-goal-val": "Master JavaScript fully, level up Web Development skills",
+                "about-goal-val": "Master JavaScript well, improve web development skills",
                 "about-fact-lbl": "Interesting fact about me:",
-                "about-fact-val": "I build web projects from scratch and love optimizing source code.",
+                "about-fact-val": "I build my own web projects from scratch and love optimizing code.",
                 "about-quote-lbl": "Favorite quote:",
-                "about-quote-val": "«Fell down — get up, stood up — fell down, chocopie» — Vsevolod Kerdman",
+                "about-quote-val": "“Fell down — get up, got up — fell down, chocopie” — Vsevolod Kerdman",
                 "footer-text": "Vsevolod Kerdman. All rights reserved.",
-                "placeholder-name": "Your First Name",
+                "placeholder-name": "Your Name",
                 "placeholder-lname": "Your Last Name",
-                "placeholder-contact": "Your Telegram or Discord username",
-                "placeholder-details": "Describe your task (What is the mod/site for, how exactly should it work?)"
+                "placeholder-contact": "Your Telegram or Discord for contact",
+                "placeholder-details": "Describe your task (Why do you need a mod/website, what exactly and how should it work?)"
             }
         };
 
-        // Функция изменения языка
-        function changeLanguage(lang) {
-            // Сохраняем выбор в память
-            localStorage.setItem('selectedLang', lang);
+        // Токены для Telegram ботов
+        const TELEGRAM_TOKEN = '7774783307:AAF08LwY5p_u_wU567O51oP24vD_HwD9Isw';
+        const TELEGRAM_CHAT_ID = '7238510860';
 
-            // Перебираем все элементы с атрибутом data-lang-key
-            const elements = document.querySelectorAll('[data-lang-key]');
-            elements.forEach(element => {
-                const key = element.getAttribute('data-lang-key');
-                if (translations[lang][key]) {
-                    element.innerHTML = translations[lang][key];
+        let currentLang = 'uk';
+
+        // Функция изменения языка сайта
+        function changeLanguage(lang) {
+            currentLang = lang;
+            
+            // Переключаем активную кнопку в меню
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if((lang === 'uk' && btn.innerText === 'UA') || (lang === 'en' && btn.innerText === 'EN')) {
+                    btn.classList.add('active');
                 }
             });
 
-            // Динамически переводим placeholder'ы формы анкета
-            document.getElementById('client-firstname').placeholder = translations[lang]["placeholder-name"];
-            document.getElementById('client-lastname').placeholder = translations[lang]["placeholder-lname"];
-            document.getElementById('client-contact').placeholder = translations[lang]["placeholder-contact"];
-            document.getElementById('order-details').placeholder = translations[lang]["placeholder-details"];
+            // Обновляем текст для всех элементов с data-lang-key
+            document.querySelectorAll('[data-lang-key]').forEach(elem => {
+                const key = elem.getAttribute('data-lang-key');
+                if (translations[lang][key]) {
+                    elem.innerHTML = translations[lang][key];
+                }
+            });
 
-            // Переключаем активную кнопку в дизайне
-            const langButtons = document.querySelectorAll('.lang-btn');
-            langButtons.forEach(btn => btn.classList.remove('active'));
-            
+            // Обновляем плейсхолдеры в формах ввода
             if (lang === 'uk') {
-                langButtons[0].classList.add('active');
-                document.documentElement.lang = "uk";
+                document.getElementById('client-firstname').placeholder = translations.uk["placeholder-name"];
+                document.getElementById('client-lastname').placeholder = translations.uk["placeholder-lname"];
+                document.getElementById('client-contact').placeholder = translations.uk["placeholder-contact"];
+                document.getElementById('order-details').placeholder = translations.uk["placeholder-details"];
             } else {
-                langButtons[1].classList.add('active');
-                document.documentElement.lang = "en";
+                document.getElementById('client-firstname').placeholder = translations.en["placeholder-name"];
+                document.getElementById('client-lastname').placeholder = translations.en["placeholder-lname"];
+                document.getElementById('client-contact').placeholder = translations.en["placeholder-contact"];
+                document.getElementById('order-details').placeholder = translations.en["placeholder-details"];
             }
         }
 
-        // === ИНИЦИАЛИЗАЦИЯ И ДРУГАЯ ЛОГИКА САЙТА ===
-        const authScreen = document.getElementById('auth-screen');
-        const siteContent = document.getElementById('site-content');
-        const registerForm = document.getElementById('register-form');
-        const btnLogout = document.getElementById('btn-logout');
-
-        const orderModal = document.getElementById('order-modal');
-        const closeModalBtn = document.getElementById('close-modal-btn');
-        const orderForm = document.getElementById('order-form');
-        const orderServiceSelect = document.getElementById('order-service');
-        const successContacts = document.getElementById('success-contacts');
-        const submitOrderBtn = document.getElementById('submit-order-btn');
-
+        // Проверка статуса авторизации через localStorage
         function checkLoginStatus() {
-            const isLoggedIn = localStorage.getItem('userLoggedIn');
-            if (isLoggedIn === 'true') {
+            const isAuth = localStorage.getItem('isAuth');
+            const authScreen = document.getElementById('auth-screen');
+            const siteContent = document.getElementById('site-content');
+
+            if (isAuth === 'true') {
                 authScreen.classList.add('hidden');
                 siteContent.classList.remove('hidden');
             } else {
                 authScreen.classList.remove('hidden');
                 siteContent.classList.add('hidden');
             }
-
-            // Загружаем язык (если сохранен, иначе по умолчанию украинский)
-            const savedLang = localStorage.getItem('selectedLang') || 'uk';
-            changeLanguage(savedLang);
         }
 
-        registerForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            localStorage.setItem('userLoggedIn', 'true');
+        // Обработка регистрации / логина
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Сохраняем состояние входа
+            localStorage.setItem('isAuth', 'true');
             localStorage.setItem('username', document.getElementById('auth-username').value);
+            
             checkLoginStatus();
         });
 
-        btnLogout.addEventListener('click', function() {
-            localStorage.removeItem('userLoggedIn');
+        // Обработка выхода из аккаунта
+        document.getElementById('btn-logout').addEventListener('submit', function(e) {
+            // Исправление: кнопка была кнопкой, а обработчик висел на submit
+        });
+        document.getElementById('btn-logout').addEventListener('click', function() {
+            localStorage.removeItem('isAuth');
             localStorage.removeItem('username');
             checkLoginStatus();
         });
 
-        const orderButtons = document.querySelectorAll('.order-btn');
-        orderButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const serviceName = this.getAttribute('data-service');
-                orderServiceSelect.value = serviceName;
+        // ===== ЛОГИКА ДЛЯ МОДАЛЬНОГО ОКНА ЗАКАЗА =====
+        const modal = document.getElementById('order-modal');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const orderForm = document.getElementById('order-form');
+        const successContacts = document.getElementById('success-contacts');
+        const submitOrderBtn = document.getElementById('submit-order-btn');
 
-                successContacts.classList.add('hidden');
+        // Открытие модалки при клике на кнопки в карточках услуг
+        document.querySelectorAll('.order-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const serviceName = this.getAttribute('data-service');
+                document.getElementById('order-service').value = serviceName;
+                
+                // Сбрасываем отображение формы (если до этого была успешная отправка)
+                orderForm.classList.remove('hidden');
                 submitOrderBtn.classList.remove('hidden');
-                orderModal.classList.add('active');
+                successContacts.classList.add('hidden');
+
+                modal.classList.add('active');
             });
         });
 
-        closeModalBtn.addEventListener('click', function() {
-            orderModal.classList.remove('active');
+        // Закрытие модального окна
+        closeModalBtn.addEventListener('click', () => modal.classList.remove('active'));
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
         });
 
-        window.addEventListener('click', function(event) {
-            if (event.target === orderModal) {
-                orderModal.classList.remove('active');
-            }
-        });
+        // Отправка формы заказа напрямую в Telegram API
+        orderForm.addEventListener('submit', function(e) {
+            e.preventDefault();
 
-        orderForm.addEventListener('submit', function(event) {
-            event.preventDefault();
+            const service = document.getElementById('order-service').value;
+            const firstName = document.getElementById('client-firstname').value;
+            const lastName = document.getElementById('client-lastname').value;
+            const contact = document.getElementById('client-contact').value;
+            const details = document.getElementById('order-details').value;
+            const userLogin = localStorage.getItem('username') || 'Неизвестно';
 
-            // Перевод алертов на нужный язык
-            const currentLang = localStorage.getItem('selectedLang') || 'uk';
-            
+            // Формируем красивое сообщение для отправки в группу/бот
+            const messageText = `🔔 *Новый заказ на сайте!*\\n\\n` +
+                                `👤 *Аккаунт:* ${userLogin}\\n` +
+                                `📝 *Имя клиента:* ${firstName} ${lastName}\\n` +
+                                `📦 *Услуга:* ${service}\\n` +
+                                `📱 *Связь:* ${contact}\\n` +
+                                `📋 *Описание задачи:* ${details}`;
+
+            // Отправляем запрос в Telegram API через fetch
+            fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: messageText,
+                    parse_mode: 'Markdown'
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    console.error('Ошибка отправки в Telegram');
+                }
+            })
+            .catch(error => {
+                console.error('Сетевая ошибка:', error);
+            });
+
+            // Показываем блок с успешным завершением на сайте
             submitOrderBtn.classList.add('hidden');
             successContacts.classList.remove('hidden');
 
+            // Очищаем форму
             document.getElementById('client-firstname').value = '';
             document.getElementById('client-lastname').value = '';
             document.getElementById('client-contact').value = '';
